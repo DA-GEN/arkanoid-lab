@@ -8,6 +8,7 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 
+import com.dagen.arkanoid.data.GamePrefs;
 import com.dagen.arkanoid.game.Difficulty;
 import com.dagen.arkanoid.game.GameWorld;
 
@@ -28,6 +29,13 @@ public class GameActivity extends Activity {
 
         world = new GameWorld(difficulty);
         GameView gameView = new GameView(this, world);
+        GamePrefs prefs = new GamePrefs(this);
+        world.setListener(new GameWorld.Listener() {
+            @Override
+            public void onGameFinished(int score, boolean victory) {
+                gameView.setNewRecord(prefs.submitScore(difficulty, score));
+            }
+        });
         setContentView(gameView);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         hideSystemBars();

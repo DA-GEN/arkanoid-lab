@@ -2,6 +2,20 @@
 <resources>
     <string name="app_name">Arkanoid</string>
 
+    <string name="menu_title">ARKANOID</string>
+    <string name="menu_subtitle">Break all the bricks to win</string>
+    <string name="menu_difficulty">Difficulty</string>
+    <string name="menu_best_score">Best score: %1$s</string>
+    <string name="menu_play">Play</string>
+
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_normal">Normal</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="difficulty_easy_description">Slow ball and a wide paddle</string>
+    <string name="difficulty_normal_description">Classic game</string>
+    <string name="difficulty_hard_description">Fast ball, narrow paddle, tougher bricks</string>
+    <string name="difficulty_details">%1$s\n%2$s · points ×%3$d</string>
+
     <string name="hud_score">Score: %1$s</string>
     <string name="hud_level">Level %1$d/%2$d</string>
     <string name="hud_lives">Lives: %1$d</string>
@@ -17,6 +31,11 @@
     <string name="overlay_final_score">Final score: %1$s</string>
     <string name="overlay_play_again">Tap to play again</string>
     <string name="overlay_new_record">New record!</string>
+
+    <plurals name="lives">
+        <item quantity="one">%d life</item>
+        <item quantity="other">%d lives</item>
+    </plurals>
 
     <plurals name="lives_left">
         <item quantity="one">%d life left</item>

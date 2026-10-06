@@ -10,6 +10,5 @@
 
     <style name="Theme.Arkanoid.Fullscreen">
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
 </resources>

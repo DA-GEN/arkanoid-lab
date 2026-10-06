@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Arkanoid</string>
+
+    <string name="hud_score">Score: %1$s</string>
+    <string name="hud_level">Level %1$d/%2$d</string>
+    <string name="hud_lives">Lives: %1$d</string>
+
+    <string name="overlay_ready">Tap to launch</string>
+    <string name="overlay_hint">Drag to move the paddle</string>
+    <string name="overlay_paused">Paused</string>
+    <string name="overlay_resume">Tap to continue</string>
+    <string name="overlay_level_cleared">Level %1$d cleared!</string>
+    <string name="overlay_next_level">Tap for the next level</string>
+    <string name="overlay_game_over">Game over</string>
+    <string name="overlay_victory">You win!</string>
+    <string name="overlay_final_score">Final score: %1$s</string>
+    <string name="overlay_play_again">Tap to play again</string>
+    <string name="overlay_new_record">New record!</string>
+
+    <plurals name="lives_left">
+        <item quantity="one">%d life left</item>
+        <item quantity="other">%d lives left</item>
+    </plurals>
 </resources>

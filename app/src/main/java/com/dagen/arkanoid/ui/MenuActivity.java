@@ -1,20 +1,23 @@
 package com.dagen.arkanoid.ui;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.dagen.arkanoid.R;
 import com.dagen.arkanoid.data.GamePrefs;
 import com.dagen.arkanoid.game.Difficulty;
+import com.dagen.arkanoid.i18n.AppLanguage;
+import com.dagen.arkanoid.i18n.LocaleHelper;
 
 import java.text.NumberFormat;
 import java.util.logging.Logger;
 
-public class MenuActivity extends Activity {
+public class MenuActivity extends BaseActivity {
     private static final Logger LOG = Logger.getLogger(MenuActivity.class.getName());
 
     private static final int[] DIFFICULTY_BUTTONS = {
@@ -24,6 +27,9 @@ public class MenuActivity extends Activity {
             R.string.difficulty_easy_description,
             R.string.difficulty_normal_description,
             R.string.difficulty_hard_description,
+    };
+    private static final int[] LANGUAGE_NAMES = {
+            R.string.language_system, R.string.language_english, R.string.language_ukrainian,
     };
 
     private GamePrefs prefs;
@@ -49,6 +55,11 @@ public class MenuActivity extends Activity {
             updateDifficultyInfo();
         });
         findViewById(R.id.play_button).setOnClickListener(v -> startGame());
+
+        Button languageButton = findViewById(R.id.language_button);
+        languageButton.setText(getString(R.string.menu_language,
+                getString(LANGUAGE_NAMES[prefs.getLanguage().ordinal()])));
+        languageButton.setOnClickListener(v -> showLanguageDialog());
     }
 
     @Override
@@ -70,7 +81,7 @@ public class MenuActivity extends Activity {
     private void updateDifficultyInfo() {
         Difficulty difficulty = selectedDifficulty();
         Resources res = getResources();
-        NumberFormat format = NumberFormat.getIntegerInstance(res.getConfiguration().getLocales().get(0));
+        NumberFormat format = NumberFormat.getIntegerInstance(LocaleHelper.currentLocale(this));
 
         String lives = res.getQuantityString(R.plurals.lives, difficulty.getLives(), difficulty.getLives());
         descriptionView.setText(getString(R.string.difficulty_details,
@@ -84,5 +95,25 @@ public class MenuActivity extends Activity {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.EXTRA_DIFFICULTY, difficulty.name());
         startActivity(intent);
+    }
+
+    private void showLanguageDialog() {
+        AppLanguage current = prefs.getLanguage();
+        String[] names = new String[LANGUAGE_NAMES.length];
+        for (int i = 0; i < names.length; i++) {
+            names[i] = getString(LANGUAGE_NAMES[i]);
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.language_title)
+                .setSingleChoiceItems(names, current.ordinal(), (dialog, which) -> {
+                    dialog.dismiss();
+                    AppLanguage chosen = AppLanguage.values()[which];
+                    if (chosen != current) {
+                        LOG.info("language changed: " + current + " -> " + chosen);
+                        prefs.setLanguage(chosen);
+                        recreate();
+                    }
+                })
+                .show();
     }
 }

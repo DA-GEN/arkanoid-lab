@@ -20,8 +20,10 @@ import com.dagen.arkanoid.game.Brick;
 import com.dagen.arkanoid.game.GameState;
 import com.dagen.arkanoid.game.GameWorld;
 import com.dagen.arkanoid.game.Paddle;
+import com.dagen.arkanoid.i18n.LocaleHelper;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,8 +79,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         holder.addCallback(this);
         setFocusable(true);
 
-        Resources res = context.getResources();
-        numberFormat = NumberFormat.getIntegerInstance(res.getConfiguration().getLocales().get(0));
+        numberFormat = NumberFormat.getIntegerInstance(LocaleHelper.currentLocale(context));
         backgroundColor = context.getColor(R.color.background);
         fieldColor = context.getColor(R.color.surface);
         accentColor = context.getColor(R.color.accent);
@@ -149,7 +150,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         scale = Math.min(availableW / GameWorld.WIDTH, availableH / GameWorld.HEIGHT);
         offsetX = safeLeft + (availableW - GameWorld.WIDTH * scale) / 2f;
         offsetY = safeTop + (availableH - GameWorld.HEIGHT * scale) / 2f;
-        LOG.fine(String.format("viewport %dx%d, scale %.3f", width, height, scale));
+        LOG.fine(String.format(Locale.ROOT, "viewport %dx%d, scale %.3f", width, height, scale));
     }
 
     @Override
@@ -345,17 +346,29 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
             fillPaint.setColor(Color.argb(170, 0, 0, 0));
             canvas.drawRect(0f, GameWorld.HUD_HEIGHT, GameWorld.WIDTH, GameWorld.HEIGHT, fillPaint);
         }
-        canvas.drawText(title, GameWorld.WIDTH / 2f, OVERLAY_Y, titlePaint);
+        drawCentered(canvas, title, OVERLAY_Y, titlePaint);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setColor(textColor);
-        canvas.drawText(subtitle, GameWorld.WIDTH / 2f, OVERLAY_Y + 80f, textPaint);
+        drawCentered(canvas, subtitle, OVERLAY_Y + 80f, textPaint);
         textPaint.setColor(secondaryTextColor);
         if (hint != null) {
-            canvas.drawText(hint, GameWorld.WIDTH / 2f, OVERLAY_Y + 140f, textPaint);
+            drawCentered(canvas, hint, OVERLAY_Y + 140f, textPaint);
         }
         if (state.isFinished() && newRecord) {
             textPaint.setColor(accentColor);
-            canvas.drawText(res.getString(R.string.overlay_new_record), GameWorld.WIDTH / 2f, OVERLAY_Y + 200f, textPaint);
+            drawCentered(canvas, res.getString(R.string.overlay_new_record), OVERLAY_Y + 200f, textPaint);
         }
+    }
+
+    // Translations differ in length, so long lines are shrunk to fit the field
+    private void drawCentered(Canvas canvas, String text, float y, Paint paint) {
+        float size = paint.getTextSize();
+        float maxWidth = GameWorld.WIDTH - 60f;
+        float width = paint.measureText(text);
+        if (width > maxWidth) {
+            paint.setTextSize(size * maxWidth / width);
+        }
+        canvas.drawText(text, GameWorld.WIDTH / 2f, y, paint);
+        paint.setTextSize(size);
     }
 }

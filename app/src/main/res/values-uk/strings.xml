@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Арканоїд</string>
+
+    <string name="menu_title">АРКАНОЇД</string>
+    <string name="menu_subtitle">Розбийте всі цеглинки, щоб перемогти</string>
+    <string name="menu_difficulty">Складність</string>
+    <string name="menu_best_score">Рекорд: %1$s</string>
+    <string name="menu_play">Грати</string>
+    <string name="menu_language">Мова: %1$s</string>
+
+    <string name="language_title">Мова застосунку</string>
+    <string name="language_system">Як у системі</string>
+
+    <string name="difficulty_easy">Легко</string>
+    <string name="difficulty_normal">Нормально</string>
+    <string name="difficulty_hard">Складно</string>
+    <string name="difficulty_easy_description">Повільний м\'яч і широка платформа</string>
+    <string name="difficulty_normal_description">Класична гра</string>
+    <string name="difficulty_hard_description">Швидкий м\'яч, вузька платформа, міцніші цеглинки</string>
+    <string name="difficulty_details">%1$s\n%2$s · очки ×%3$d</string>
+
+    <string name="hud_score">Рахунок: %1$s</string>
+    <string name="hud_level">Рівень %1$d/%2$d</string>
+    <string name="hud_lives">Життя: %1$d</string>
+
+    <string name="overlay_ready">Торкніться для старту</string>
+    <string name="overlay_hint">Ведіть пальцем, щоб рухати платформу</string>
+    <string name="overlay_paused">Пауза</string>
+    <string name="overlay_resume">Торкніться, щоб продовжити</string>
+    <string name="overlay_level_cleared">Рівень %1$d пройдено!</string>
+    <string name="overlay_next_level">Торкніться, щоб перейти далі</string>
+    <string name="overlay_game_over">Гру завершено</string>
+    <string name="overlay_victory">Перемога!</string>
+    <string name="overlay_final_score">Підсумок: %1$s</string>
+    <string name="overlay_play_again">Торкніться, щоб зіграти ще раз</string>
+    <string name="overlay_new_record">Новий рекорд!</string>
+
+    <plurals name="lives">
+        <item quantity="one">%d життя</item>
+        <item quantity="few">%d життя</item>
+        <item quantity="many">%d життів</item>
+        <item quantity="other">%d життя</item>
+    </plurals>
+
+    <plurals name="lives_left">
+        <item quantity="one">Залишилося %d життя</item>
+        <item quantity="few">Залишилося %d життя</item>
+        <item quantity="many">Залишилося %d життів</item>
+        <item quantity="other">Залишилося %d життя</item>
+    </plurals>
+</resources>

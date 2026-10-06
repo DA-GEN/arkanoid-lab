@@ -25,6 +25,13 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
+    // languages are switched inside the app, so every locale must stay in the base apk
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }

@@ -1,6 +1,5 @@
 package com.dagen.arkanoid.ui;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.dagen.arkanoid.game.GameWorld;
 
 import java.util.logging.Logger;
 
-public class GameActivity extends Activity {
+public class GameActivity extends BaseActivity {
     public static final String EXTRA_DIFFICULTY = "com.dagen.arkanoid.DIFFICULTY";
 
     private static final Logger LOG = Logger.getLogger(GameActivity.class.getName());

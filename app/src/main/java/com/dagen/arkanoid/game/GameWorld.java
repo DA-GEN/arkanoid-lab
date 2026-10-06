@@ -3,6 +3,7 @@ package com.dagen.arkanoid.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
@@ -161,7 +162,7 @@ public class GameWorld {
         paddle.moveTo(WIDTH / 2f);
         placeBallOnPaddle();
         state = GameState.READY;
-        LOG.info(String.format("level %d started, bricks: %d, difficulty: %s",
+        LOG.info(String.format(Locale.ROOT, "level %d started, bricks: %d, difficulty: %s",
                 index + 1, remainingBricks(), difficulty));
     }
 

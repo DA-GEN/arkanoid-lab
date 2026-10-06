@@ -239,6 +239,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         canvas.save();
         canvas.translate(offsetX, offsetY);
         canvas.scale(scale, scale);
+        canvas.clipRect(0f, 0f, GameWorld.WIDTH, GameWorld.HEIGHT);
         synchronized (world) {
             drawField(canvas);
             drawBricks(canvas);
@@ -299,7 +300,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
                 24f, baseline, textPaint);
         textPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(getContext().getString(R.string.hud_level, world.getLevel(), world.getLevelCount()),
-                GameWorld.WIDTH / 2f + 40f, baseline, textPaint);
+                GameWorld.WIDTH / 2f, baseline, textPaint);
         textPaint.setTextAlign(Paint.Align.RIGHT);
         canvas.drawText(getContext().getString(R.string.hud_lives, world.getLives()),
                 PAUSE_LEFT - 24f, baseline, textPaint);
